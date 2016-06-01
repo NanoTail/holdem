@@ -4,7 +4,7 @@
   "description": "HoldEm challenge",
   "main": "index.js",
   "scripts": {
-    "test": "clear && mocha test"
+    "test": "mocha test"
   },
   "author": "nilobarp",
   "license": "MIT",
