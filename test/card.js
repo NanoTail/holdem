@@ -31,4 +31,19 @@ describe('Cards', function () {
     expect(hand.length).to.equal(dealCards)
     expect(cards.deck.length).to.equal(cardCount - dealCards)
   })
+
+  it('cannot deal more than 24 hands', function () {
+    var newDeck = new Cards()
+    newDeck.shuffle()
+    //deal the community cards
+    newDeck.deal(3)
+    //try to deal 25 hands
+    expect(
+        () => {
+          _.times(25, 
+              () => { 
+                newDeck.deal(2) 
+              })
+        }).to.throw(Error)
+  })
 })
