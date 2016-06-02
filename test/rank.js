@@ -21,7 +21,28 @@ describe('Hand Ranks', function () {
     expect(handRank.hands.length).to.equal(5)
   })
 
-  it('detect a flush', function () {
+  it('returns value of hand', function (){
+    var cards = ['C7','C3','D9','S5','HT']
+    expect(
+      new HandRank([cards, cards])._toValue(cards)
+    ).to.equal('7395T')
+  })
+
+  it('returns suits of hand', function (){
+    var cards = ['C7','C3','D9','S5','H6']
+    expect(
+      new HandRank([cards, cards])._toSuit(cards)
+    ).to.equal('CCDSH')
+  })
+
+  it('finds highest card', function (){
+    var cards = ['CK','CQ','D5','SA','HT']
+    expect(
+      new HandRank([cards, cards])._highCard(cards) 
+    ).to.equal('A')
+  })
+
+  it('detects a flush', function () {
     var cards = new Cards()
     cards.shuffle()
     var hands = _.times(2, () => { return cards.deal(5) })
@@ -31,7 +52,7 @@ describe('Hand Ranks', function () {
     expect(handRank._isFlush(handRank.hands[0])).to.be.true
   })
 
-  it('detect a straight', function () {
+  it('detects a straight', function () {
     var cards = new Cards()
     cards.shuffle()
     var hands = _.times(2, () => { return cards.deal(5) })
