@@ -21,6 +21,15 @@ describe('Hand Ranks', function () {
     expect(handRank.hands.length).to.equal(5)
   })
 
+  it('sets hand rank', function () {
+    var cards = new Cards()
+    cards.shuffle()
+    var hands = _.times(5, () => { return cards.deal(5) })
+    var handRank = new HandRank(hands)
+    handRank._setRank(handRank.hands[0], 'Royal Flush')
+    expect(handRank.hands[0].rank).to.equal(10)
+  })
+
   it('finds highest card', function (){
     var cards = new Cards()
     cards.shuffle()
@@ -68,11 +77,14 @@ describe('Hand Ranks', function () {
     var hands = _.times(2, () => { return cards.deal(5) })
     //override the first hand and make a straight
     hands[0] = ['H7', 'HJ', 'HT', 'H8', 'H9']
+    hands[1] = ['H7', 'DJ', 'HT', 'H8', 'H9']
     var handRank = new HandRank(hands)
     expect(handRank._isStraightFlush(handRank.hands[0])).to.be.true
     expect(
       handRank.hands[0].rank
     ).to.equal(9)
+    //check false positive
+    expect(handRank._isStraightFlush(handRank.hands[1])).to.be.false
   })
 
   it('detects a royal flush', function () {

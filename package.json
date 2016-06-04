@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "DEBUG=holdem:* _mocha test",
-    "file": "DEBUG=holdem:* _mocha $FUT",
-    "cover": "istanbul cover _mocha -- --compilers js:babel-register test/"
+    "file": "DEBUG=holdem:* _mocha $F",
+    "cover": "istanbul cover _mocha -- --compilers js:babel-register test/",
+    "coverfile": "istanbul cover _mocha -- --compilers js:babel-register $F"
   },
   "author": "nilobarp",
   "license": "MIT",

@@ -18,7 +18,17 @@ describe('Hand object', function() {
     expect(hand.cards).to.eql(cards)
   })
 
-  it('returns value of face cards', function () {
+  it('returns array of cards without suits', function () {
+    expect(hand._toValue(['C5','S3','HT','SA','S4']))
+      .to.eql(['5','3','T','A','4'])
+  })
+
+  it('returns a string of suits', function () {
+    expect(hand._toSuit(['C5','S3','HT','SA','S4']))
+      .to.equal('CSHSS')
+  })
+
+  it('returns numeric value of face cards', function () {
     expect(hand._faceValue('5')).to.equal(5)
     expect(hand._faceValue('T')).to.equal(10)
     expect(hand._faceValue('J')).to.equal(11)
