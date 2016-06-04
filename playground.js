@@ -9,6 +9,24 @@ var hash = [
 
 var map = ['2','3','4','5','6','7','8','9','T','J','Q','K','A']
 
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 function d(msg) {
   console.log(msg)
@@ -23,10 +41,9 @@ function reduce(handValue) {
 }
 
 function faceValue (face) {
-  var face = (face === 'T' ? 10 : face === 'J' ? 11 : face === 'Q' ? 12 : face === 'K' ? 13 : face === 'A' ? 14 : face)
-  return face
+  var value = (face === 'T' ? 10 : face === 'J' ? 11 : face === 'Q' ? 12 : face === 'K' ? 13 : face === 'A' ? 14 : face)
+  return value
 }
-
 
 //checks
 function highCard(hash) {
@@ -93,10 +110,26 @@ function fourOfaKind (hash) {
 
 reduce(handValue)
 d(hash)
-d('High card: ' + highCard(hash))
-d('Straight: ' + straight(hash))
-d('1 Pair: ' + onePair(hash))
-d('2 Pairs: ' + twoPairs(hash))
-d('3 of a kind: ' + threeOfaKind(hash))
-d('Fullhouse: ' + fullHouse(hash))
-d('4 of a kind: ' + fourOfaKind(hash))
+function check(hash) {
+  var handRank = 'High Card'
+  var high = highCard(hash)
+  if (fourOfaKind(hash)) {
+    handRank = 'Four of a Kind'
+  } else if (fullHouse(hash)) {
+    handRank = 'Full House'
+  } else if (straight(hash)) {
+    handRank = 'Straight'
+  } else if (threeOfaKind(hash)) {
+    handRank = 'Three of a Kind'
+  } else if (twoPairs(hash)) {
+    handRank = '2 Pair'
+  } else if (onePair(hash)) {
+    handRank = '1 Pair'
+  }
+
+  //return {rank: handRank, high: high}
+  return handRank
+}
+console.time('holdem')
+d(check(hash))
+console.timeEnd('holdem')

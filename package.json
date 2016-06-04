@@ -4,7 +4,8 @@
   "description": "HoldEm challenge",
   "main": "index.js",
   "scripts": {
-    "test": "DEBUG=holdem:* mocha test",
+    "test": "DEBUG=holdem:* _mocha test",
+    "file": "DEBUG=holdem:* _mocha $FUT",
     "cover": "istanbul cover _mocha -- --compilers js:babel-register test/"
   },
   "author": "nilobarp",

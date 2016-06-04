@@ -21,20 +21,6 @@ describe('Hand Ranks', function () {
     expect(handRank.hands.length).to.equal(5)
   })
 
-  it('returns value of hand', function (){
-    var cards = ['C7','C3','D9','S5','HT']
-    expect(
-      new HandRank([cards, cards])._toValue(cards)
-    ).to.equal('7395T')
-  })
-
-  it('returns suits of hand', function (){
-    var cards = ['C7','C3','D9','S5','H6']
-    expect(
-      new HandRank([cards, cards])._toSuit(cards)
-    ).to.equal('CCDSH')
-  })
-
   it('finds highest card', function (){
     var cards = new Cards()
     cards.shuffle()
