@@ -40,9 +40,6 @@ describe('Hand Ranks', function () {
     expect(
       handRank._highCard(handRank.hands[0]) 
     ).to.equal('A')
-    expect(
-      handRank.hands[0].rank
-    ).to.equal(1)
   })
 
   it('detects a flush', function () {
@@ -53,9 +50,6 @@ describe('Hand Ranks', function () {
     hands[0] = ['H5', 'HQ', 'H2', 'H7', 'H9']
     var handRank = new HandRank(hands)
     expect(handRank._isFlush(handRank.hands[0])).to.be.true
-    expect(
-      handRank.hands[0].rank
-    ).to.equal(6)
   })
 
   it('detects a straight', function () {
@@ -66,9 +60,6 @@ describe('Hand Ranks', function () {
     hands[0] = ['HK', 'HA', 'HQ', 'HJ', 'HT']
     var handRank = new HandRank(hands)
     expect(handRank._isStraight(handRank.hands[0])).to.be.true
-    expect(
-      handRank.hands[0].rank
-    ).to.equal(5)
   })
 
   it('detects a straight flush', function () {
@@ -80,9 +71,6 @@ describe('Hand Ranks', function () {
     hands[1] = ['H7', 'DJ', 'HT', 'H8', 'H9']
     var handRank = new HandRank(hands)
     expect(handRank._isStraightFlush(handRank.hands[0])).to.be.true
-    expect(
-      handRank.hands[0].rank
-    ).to.equal(9)
     //check false positive
     expect(handRank._isStraightFlush(handRank.hands[1])).to.be.false
   })
@@ -96,12 +84,74 @@ describe('Hand Ranks', function () {
     hands[1] = ['HK', 'ST', 'HA', 'HJ', 'HQ'] //check for false positives
     var handRank = new HandRank(hands)
     expect(handRank._isRoyalFlush(handRank.hands[0])).to.be.true
-    expect(
-      handRank.hands[0].rank
-    ).to.equal(10)
 
     expect(handRank._isRoyalFlush(handRank.hands[1])).to.be.false
 
+  })
+
+  it('detects 1 pair', function () {
+    var cards = new Cards()
+    cards.shuffle()
+    var hands = _.times(2, () => { return cards.deal(5) })
+    //override the first hand and make a straight
+    hands[0] = ['HK', 'HT', 'HT', 'HJ', 'HQ']
+    hands[1] = ['HK', 'ST', 'HA', 'HJ', 'HQ'] //check for false positives
+    var handRank = new HandRank(hands)
+    expect(handRank._isOnePair(handRank.hands[0])).to.be.true
+
+    expect(handRank._isOnePair(handRank.hands[1])).to.be.false
+  })
+
+  it('detects 2 pair', function () {
+    var cards = new Cards()
+    cards.shuffle()
+    var hands = _.times(2, () => { return cards.deal(5) })
+    //override the first hand and make a straight
+    hands[0] = ['HK', 'HT', 'HT', 'HJ', 'HK']
+    hands[1] = ['HK', 'ST', 'HA', 'HJ', 'HQ'] //check for false positives
+    var handRank = new HandRank(hands)
+    expect(handRank._isTwoPair(handRank.hands[0])).to.be.true
+
+    expect(handRank._isTwoPair(handRank.hands[1])).to.be.false
+  })
+
+  it('detects 3 of a kind', function () {
+    var cards = new Cards()
+    cards.shuffle()
+    var hands = _.times(2, () => { return cards.deal(5) })
+    //override the first hand and make a straight
+    hands[0] = ['HK', 'HT', 'HT', 'HJ', 'HT']
+    hands[1] = ['HK', 'ST', 'HA', 'HJ', 'HQ'] //check for false positives
+    var handRank = new HandRank(hands)
+    expect(handRank._isThreeOfaKind(handRank.hands[0])).to.be.true
+
+    expect(handRank._isThreeOfaKind(handRank.hands[1])).to.be.false
+  })
+
+  it('detects fullhouse', function () {
+    var cards = new Cards()
+    cards.shuffle()
+    var hands = _.times(2, () => { return cards.deal(5) })
+    //override the first hand and make a straight
+    hands[0] = ['HK', 'HT', 'HT', 'HK', 'HT']
+    hands[1] = ['HK', 'HT', 'HQ', 'HK', 'HT'] //check for false positives
+    var handRank = new HandRank(hands)
+    expect(handRank._isFullHouse(handRank.hands[0])).to.be.true
+
+    expect(handRank._isFullHouse(handRank.hands[1])).to.be.false
+  })
+
+  it('detects 4 of a kind', function () {
+    var cards = new Cards()
+    cards.shuffle()
+    var hands = _.times(2, () => { return cards.deal(5) })
+    //override the first hand and make a straight
+    hands[0] = ['HT', 'HT', 'HT', 'HK', 'HT']
+    hands[1] = ['HT', 'HT', 'HQ', 'HK', 'HT'] //check for false positives
+    var handRank = new HandRank(hands)
+    expect(handRank._isFourOfaKind(handRank.hands[0])).to.be.true
+
+    expect(handRank._isFourOfaKind(handRank.hands[1])).to.be.false
   })
 })
 
