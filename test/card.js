@@ -36,7 +36,9 @@ describe('Cards', function () {
     var newDeck = new Cards()
     newDeck.shuffle()
     //deal the community cards
-    newDeck.deal(3)
+    newDeck.dealCommunityCards()
+    //deal hold cards
+    newDeck.deal()
     //try to deal 25 hands
     expect(
         () => {
@@ -45,5 +47,8 @@ describe('Cards', function () {
                 newDeck.deal(2) 
               })
         }).to.throw(Error)
+    //check that dealCommunity too throws error 
+    expect(() => newDeck.dealCommunityCards())
+      .to.throw(Error)
   })
 })

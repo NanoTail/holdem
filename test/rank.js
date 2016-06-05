@@ -30,7 +30,7 @@ describe('Hand Ranks', function () {
     expect(handRank.hands[0].rank).to.equal(10)
   })
 
-  it('finds highest card', function (){
+  /*it('finds highest card', function (){
     var cards = new Cards()
     cards.shuffle()
     var hands = _.times(2, () => { return cards.deal(5)})
@@ -40,7 +40,7 @@ describe('Hand Ranks', function () {
     expect(
       handRank._highCard(handRank.hands[0]) 
     ).to.equal('A')
-  })
+  })*/
 
   it('detects a flush', function () {
     var cards = new Cards()
@@ -48,8 +48,10 @@ describe('Hand Ranks', function () {
     var hands = _.times(2, () => { return cards.deal(5) })
     //override the first hand and set to a flush
     hands[0] = ['H5', 'HQ', 'H2', 'H7', 'H9']
+    hands[1] = ['H5', 'SQ', 'H2', 'H7', 'H9']
     var handRank = new HandRank(hands)
     expect(handRank._isFlush(handRank.hands[0])).to.be.true
+    expect(handRank._isFlush(handRank.hands[1])).to.be.false
   })
 
   it('detects a straight', function () {
@@ -152,6 +154,23 @@ describe('Hand Ranks', function () {
     expect(handRank._isFourOfaKind(handRank.hands[0])).to.be.true
 
     expect(handRank._isFourOfaKind(handRank.hands[1])).to.be.false
+  })
+
+  it('ranks hand', function() {
+    var hands = [
+       ['S4','DT','H8','C9','H6'] //High Card
+      ,['CA','S8','SQ','CQ','D3'] //1 Pair
+      ,['DJ','H4','DJ','D4','S5'] //2 pair
+      ,['S3','H2','D4','C6','H5'] // straight
+      ,['SA','H9','C9','DT','C9'] //: 3 of a Kind
+      ,['S4','S5','S8','S7','SQ'] //: Flush
+      ,['H9','C7','S9','C9','D9'] //4 of a kind
+      ,['HA','HT','DT','CT','CA'] //full house
+      ,['D5','D7','D4','D6','D8'] //straight flush
+      ,['DT','DK','DQ','DA','DJ'] //royal flush
+    ]
+    var handRank = new HandRank(hands)
+    hands.map((h) => { handRank.rank(h) })
   })
 })
 

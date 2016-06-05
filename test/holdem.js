@@ -1,6 +1,6 @@
 'use strict'
 
-let mocha = require('mocha')
+/*let mocha = require('mocha')
 let chai = require('chai')
 let _ = require('lodash')
 let expect = chai.expect
@@ -45,4 +45,4 @@ describe('Holdem', function () {
     expect(holdem.hand.length).to.be.equal(5)
   })
 })
-
+*/

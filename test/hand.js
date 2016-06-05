@@ -23,11 +23,6 @@ describe('Hand object', function() {
       .to.eql(['5','3','T','A','4'])
   })
 
-  it('returns a string of suits', function () {
-    expect(hand._toSuit(['C5','S3','HT','SA','S4']))
-      .to.equal('CSHSS')
-  })
-
   it('returns numeric value of face cards', function () {
     expect(hand._faceValue('5')).to.equal(5)
     expect(hand._faceValue('T')).to.equal(10)

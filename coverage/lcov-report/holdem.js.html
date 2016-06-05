@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>23/23</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>1/1</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>21/21</span>
       </div>
     </div>
   </div>
@@ -63,53 +63,167 @@
 18
 19
 20
-21</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict'
 &nbsp;
+let Card = require('./cards')
+//let Hand = require('./lib/hand')
+let Rank = require('./rank')
 let _ = require('lodash')
+let d = require('debug')('holdem:index')
 &nbsp;
-var Holdem = class holdem {
-  constructor () {
-    this.hand = []
-  }  
+var rankNames = [ 'Royal Flush', 'Straight Flush', '4 of a Kind', 'Full House', 'Flush',
+      'Straight', '3 of a Kind', '2 Pair', '1 Pair', 'High Card'].reverse()
+  //shuffle the deck
+  //deal multiple hands of 5 cards
+  //rank the hands in desc order
 &nbsp;
-  holdCards (cards) {
-    // we only need 2 hold cards, will discard any extra ones if dealt by mistake
-    this.hand = _.take(cards, 2)
+  var cards = new Card()
+  cards.shuffle().shuffle()
+  var communityCards = cards.dealCommunityCards()
+  var hands = _.times(10, () =&gt; { return cards.deal5() })
+  hands = [
+ ['S4','DT','H8','C9','H6'] //: High Card
+//,['H9','CK','S2','D5','DT']
+//,['H6','C4','DJ','D7','H3']*/
+,['CA','S8','SQ','CQ','D3'] //: 1 Pair
+//,['CK','S7','H4','D7','S3']
+//,['D3','HK','S7','DA','D7']
+,['DJ','H4','DJ','D4','S5'] //2 pair
+//,['SA','HA','H4','HQ','C4']
+//,['HT','D4','C4','CA','DT']
+,['S3','H2','D4','C6','H5']
+,['SA','H9','C9','DT','C9'] //: 3 of a Kind
+//,['H9','D6','H5','S9','C9']
+//,['DA','DK','S3','SA','CA']
+,['S4','S5','S8','S7','SQ'] //: Flush
+//,['D5','D2','DT','D9','D7']
+//,['S8','SK','S6','S2','S3']
+,['H9','C7','S9','C9','D9'] //4 of a kind
+,['HA','HT','DT','CT','CA'] //full house
+,['D5','D7','D4','D6','D8'] //straight flush
+,['DT','DK','DQ','DA','DJ'] //royal flush
+  ]
+  var handRank = new Rank(hands)
+  var ranks = handRank.rank()
+  console.time('holdem')
+  ranks = _.sortBy(ranks, (r) =&gt; { return r.rank })
+&nbsp;
+  function scoreHand(handHash) {
+    var squashed = handHash.filter(Number)
+    return 0
   }
 &nbsp;
-  communityCards (cards) {
-    this.hand = _.concat(_.take(cards, 3), this.hand)
-  }
-}
+  ranks.sort((a,b) =&gt; {
+    return (scoreHand(a.cards) - scoreHand(b.cards))
+  })
 &nbsp;
-module.exports = Holdem
+  ranks.map((r) =&gt; {
+    d(`${r.cards} : ${r.rank} : ${r.hash} : ${rankNames[r.rank-1]}`)
+  })
+  console.timeEnd('holdem')
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 04 2016 18:48:39 GMT+0800 (SGT)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Jun 06 2016 01:02:40 GMT+0800 (SGT)
 </div>
 </div>
 <script src="prettify.js"></script>
