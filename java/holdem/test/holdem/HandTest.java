@@ -30,5 +30,18 @@ public class HandTest {
         assertArrayEquals(hand.cardValues, expectedCardValues);
         assertTrue("Calculates hand rank value", hand.rankBit > 0);
     }
+
+    /**
+     * Test of setRank method, of class Hand.
+     */
+    @Test
+    public void testSetRank() {
+        System.out.println("setRank");
+        String rank = "";
+        String[] cards = new String[]{"DA","DK","DQ","DJ","DT"};
+        Hand instance = new Hand(cards);
+        instance.setRank("Royal Flush");
+        assertEquals(instance.getRank(), "Royal Flush");
+    }
     
 }

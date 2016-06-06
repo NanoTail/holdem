@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package holdem;
 
 import java.util.*;
@@ -16,16 +11,47 @@ public class Hand {
      */
     String[] cards;
     
-    HashMap<String, Integer> hash = new HashMap<String, Integer>();
-    String suits = "";
-    Integer[] cardValues = new Integer[5];
-    int rank = 0;
-    int rankBit = 0;
+    private HashMap<String, Integer> hash = new HashMap<String, Integer>();
+    private String suits = "";
+    private Integer[] cardValues = new Integer[5];
+    private String rank = "High Card";
+    private int rankBit = 0;
     
     public Hand(String[] cards) {
         this.cards = cards;
         
         this.reduce();
+        
+        this.analyze();
+    }
+    
+    public HashMap<String, Integer> hash () {
+        return hash;
+    }
+    
+    public Integer[] values () {
+        return this.cardValues;
+    }
+    
+    public String suits () {
+        return this.suits;
+    }
+    
+    public void setRank (String rank) {
+        this.rank = rank;
+    }
+    
+    public String getRank () {
+        return this.rank;
+    }
+    
+    public int rankBit () {
+        return this.rankBit;
+    }
+    
+    public void analyze() {
+        Rank analyzer = new Rank();
+        analyzer.analyze(this);
     }
     
     private String[] toValue (String[] cards) {
