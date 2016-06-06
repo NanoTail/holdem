@@ -6,8 +6,6 @@
 package holdem;
 
 import java.util.Arrays;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -26,9 +24,9 @@ public class HandTest {
         Integer[] expectedCardValues = new Integer[]{14,13,12,11,10};
         Hand hand = new Hand(cards);
         assertNotNull("Hand is constructable", hand);
-        assertEquals("Extracts cards suits", hand.suits, "DDDDD");
-        assertArrayEquals(hand.cardValues, expectedCardValues);
-        assertTrue("Calculates hand rank value", hand.rankBit > 0);
+        assertEquals("Extracts cards suits", hand.suits(), "DDDDD");
+        assertArrayEquals(hand.values(), expectedCardValues);
+        assertTrue("Calculates hand rank value", hand.rankBit() > 0);
     }
 
     /**
@@ -37,11 +35,11 @@ public class HandTest {
     @Test
     public void testSetRank() {
         System.out.println("setRank");
-        String rank = "";
+        String rank = "Royal Flush";
         String[] cards = new String[]{"DA","DK","DQ","DJ","DT"};
         Hand instance = new Hand(cards);
-        instance.setRank("Royal Flush");
-        assertEquals(instance.getRank(), "Royal Flush");
+        instance.setRank(rank);
+        assertEquals(instance.rank(), rank);
     }
     
 }

@@ -64,11 +64,12 @@ public class Rank {
     }
     
     private boolean isRoyalFlush(Hand hand) {
+        //System.out.println(Arrays.toString(hand.values()));
         if(this.isFlush(hand)) {
             return (
                     hand.values()[0] == 14 &&
                     hand.values()[1] == 13 &&
-                    hand.values()[2] == 14 &&
+                    hand.values()[2] == 12 &&
                     hand.values()[3] == 11 &&
                     hand.values()[4] == 10
             );

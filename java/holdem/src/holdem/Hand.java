@@ -41,7 +41,7 @@ public class Hand {
         this.rank = rank;
     }
     
-    public String getRank () {
+    public String rank () {
         return this.rank;
     }
     
