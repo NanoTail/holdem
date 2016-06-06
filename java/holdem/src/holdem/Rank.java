@@ -51,7 +51,7 @@ public class Rank {
     }
     
     private void setRank (Hand hand, int rank) {
-        hand.setRank(handRanks.get(rank));
+        hand.setRank(handRanks.get(rank), rank);
     }
     
     private boolean isFlush(Hand hand) {

@@ -20,9 +20,10 @@ public class HandTest {
 
     @Test
     public void testHandReduction() {
-        String[] cards = new String[]{"DA","DK","DQ","DJ","DT"};
+        String[] comCards = new String[]{"DA","DK","DQ"};
+        String[] holdCards = new String[]{"DJ","DT"};
         Integer[] expectedCardValues = new Integer[]{14,13,12,11,10};
-        Hand hand = new Hand(cards);
+        Hand hand = new Hand(comCards, holdCards);
         assertNotNull("Hand is constructable", hand);
         assertEquals("Extracts cards suits", hand.suits(), "DDDDD");
         assertArrayEquals(hand.values(), expectedCardValues);
@@ -36,10 +37,10 @@ public class HandTest {
     public void testSetRank() {
         System.out.println("setRank");
         String rank = "Royal Flush";
-        String[] cards = new String[]{"DA","DK","DQ","DJ","DT"};
-        Hand instance = new Hand(cards);
-        instance.setRank(rank);
-        assertEquals(instance.rank(), rank);
-    }
-    
+        String[] comCards = new String[]{"DA","DK","DQ"};
+        String[] holdCards = new String[]{"DJ","DT"};
+        Hand instance = new Hand(comCards, holdCards);
+        instance.setRank(rank, 10);
+        assertEquals(instance.rankName(), rank);
+    }   
 }

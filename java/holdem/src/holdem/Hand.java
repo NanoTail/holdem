@@ -5,20 +5,27 @@ import java.util.*;
  *
  * @author nilotpal
  */
-public class Hand {
+public class Hand implements Comparable<Hand>{
     /**
      * Stores dealt cards for a hand
      */
-    String[] cards;
+    String[] cards = new String[5];
     
-    private HashMap<String, Integer> hash = new HashMap<String, Integer>();
+    private HashMap<String, Integer> hash = new HashMap();
     private String suits = "";
     private Integer[] cardValues = new Integer[5];
-    private String rank = "High Card";
+    private String rankName = "High Card";
+    private int rank = 0;
     private int rankBit = 0;
     
-    public Hand(String[] cards) {
-        this.cards = cards;
+    public Hand(String[] communityCards, String[] holdCards) {
+        try {
+            System.arraycopy(communityCards, 0, cards, 0, communityCards.length);
+            System.arraycopy(holdCards, 0, cards, communityCards.length, holdCards.length);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        
         
         this.reduce();
         
@@ -37,12 +44,17 @@ public class Hand {
         return this.suits;
     }
     
-    public void setRank (String rank) {
+    public void setRank (String rankName, int rank) {
+        this.rankName = rankName;
         this.rank = rank;
     }
     
-    public String rank () {
+    public int rank () {
         return this.rank;
+    }
+    
+    public String rankName () {
+        return this.rankName;
     }
     
     public int rankBit () {
@@ -90,10 +102,20 @@ public class Hand {
             public int compare(Integer a, Integer b) {
                 String aKey = Integer.toString(a);
                 String bKey = Integer.toString(b);
-                return (hash.get(aKey) < hash.get(bKey)) ? +1 : (hash.get(aKey) > hash.get(bKey)) ? -1 : (b - a);
+                return (hash.get(aKey) < hash.get(bKey)) ? 1 : (hash.get(aKey) > hash.get(bKey)) ? -1 : (b - a);
             }
         });
         
         rankBit = cardValues[0]<<16|cardValues[1]<<12|cardValues[2]<<8|cardValues[3]<<4|cardValues[4];
+    }
+
+    @Override
+    public int compareTo(Hand o) {
+        int rankCompare = o.rank > this.rank ? 1 : o.rank < this.rank ? -1 : o.rank - this.rank;
+        if(rankCompare != 0) {
+            return rankCompare;
+        } else {
+            return (o.rankBit > this.rankBit) ? 1 : (o.rankBit < this.rankBit) ? -1 : (o.rankBit - this.rankBit);
+        }
     }
 }

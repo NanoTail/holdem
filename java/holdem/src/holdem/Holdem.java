@@ -5,7 +5,9 @@
  */
 package holdem;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  *
@@ -17,13 +19,24 @@ public class Holdem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String[] cards = new String[]{"D9","DK","D9","DJ","DT"};
-        Hand hand = new Hand(cards);
+        Deck deck = new Deck();
+        deck.dealCommunityCards();
+        ArrayList<Hand> hands = new ArrayList();
+        for(int i = 0; i < 10; i++) {
+            hands.add(new Hand(deck.communityCards, deck.dealHoldCards()));
+        }
         
-        /*System.out.println(hand.rankBit);
-        System.out.println(hand.hash.toString());
-        System.out.println(hand.suits);
-        System.out.println(Arrays.toString(hand.cardValues));*/
+        Collections.sort(hands);
+        
+        for(int i = 0; i < 10; i++) {
+            System.out.println(
+                    Arrays.toString(hands.get(i).cards) + " : " +
+                            hands.get(i).rank() + " : " +
+                            hands.get(i).rankBit() + " : " +
+                            Arrays.toString(hands.get(i).values()) + " : " +
+                            hands.get(i).rankName()
+            );
+        }
     }
     
 }
