@@ -33,7 +33,10 @@ public class Deck {
         return dealtCards;
     }
     
-    public String[] dealHoldCards() {
+    public String[] dealHoldCards() throws Exception {
+        if(deckIndex > deck.size() - 2) {
+            throw new Exception("No more cards in deck");
+        }
         String[] dealtCards = new String[2];
         deck.subList(deckIndex, deckIndex + 2).toArray(dealtCards);
         deckIndex += 2;

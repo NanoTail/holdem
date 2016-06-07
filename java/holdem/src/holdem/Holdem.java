@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package holdem;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
+import java.io.Console;
 
 /**
  *
@@ -15,28 +9,88 @@ import java.util.Collections;
  */
 public class Holdem {
 
+    public Holdem() {
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        Deck deck = new Deck();
-        deck.dealCommunityCards();
-        ArrayList<Hand> hands = new ArrayList();
-        for(int i = 0; i < 10; i++) {
-            hands.add(new Hand(deck.communityCards, deck.dealHoldCards()));
+    public static void main(String[] args) throws Exception {
+        
+        int players = 0;
+        
+        Console console = System.console();
+        
+        if(console == null) {
+            System.out.println("Cannot attach console");
+            return;
         }
         
-        Collections.sort(hands);
+        console.printf("Poker hand analyzer");
         
-        for(int i = 0; i < 10; i++) {
-            System.out.println(
-                    Arrays.toString(hands.get(i).cards) + " : " +
-                            hands.get(i).rank() + " : " +
-                            hands.get(i).rankBit() + " : " +
-                            Arrays.toString(hands.get(i).values()) + " : " +
-                            hands.get(i).rankName()
-            );
+        while(true) {
+            console.printf("\nType 0 to Exit");
+            console.printf("\nPress any key to continue...\n");
+        
+            String choice = console.readLine();
+            if(choice.equals("0")) {
+                break;
+            }
+            
+            Deck deck = new Deck();
+            deck.dealCommunityCards();
+            
+            while (true) {
+                console.printf("\nNumber of players? (%d): ", players);
+                try {
+                    String p = console.readLine();
+                    if (p.equals("") && players > 0) {
+                        break;
+                    }
+                    players = Integer.parseInt(p);
+                    break;
+                } catch (NumberFormatException ex) {
+                    console.printf("\nInvalid number. Try again.\n");
+                }
+            }
+            
+            console.printf("\nCommunity cards: %s", Arrays.toString(deck.communityCards));
+            
+            ArrayList<Hand> hands = new ArrayList();
+            
+            for(int i = 0; i < players; i++) {
+                try {
+                    hands.add(new Hand(deck.communityCards, deck.dealHoldCards()));
+                } catch (Exception ex) {
+                    console.printf("\n\nDealt %d hands, %s\n", i+1, ex.getMessage());
+                    break;
+                }
+            }
+            
+            Collections.sort(hands);
+            console.printf("\nHands in desc order of rank");
+            console.printf("\n");
+            if (args.length > 0 && args[0].equals("-v")) {
+                console.printf("\n%20s | %20s | %20s | %10s", "Rank", "Hand", "Reduced", "Rank Bit");
+                console.printf("\n---------------------------------------------------------------------------------");
+            } else {
+                console.printf("\n%20s | %20s", "Rank", "Hand");
+                console.printf("\n----------------------------------------------");
+            }
+            for(int i = 0; i < hands.size(); i++) {
+                if (args.length > 0 && args[0].equals("-v")) {
+                    console.printf("\n%20s | %20s | %20s | %10s", 
+                            hands.get(i).rankName(),
+                            Arrays.toString(hands.get(i).cards),
+                            Arrays.toString(hands.get(i).values()),
+                            hands.get(i).rankBit()
+                            );
+                } else {
+                    console.printf("\n%20s | %20s", hands.get(i).rankName(), Arrays.toString(hands.get(i).cards));
+                }
+            }
+            console.printf("\n\n");
         }
-    }
-    
+    }    
 }
