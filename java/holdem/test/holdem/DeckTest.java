@@ -13,7 +13,7 @@ public class DeckTest {
      * Test of dealCommunityCards method, of class Deck.
      */
     @Test
-    public void testDealCommunityCards() {
+    public void testDealCommunityCards() throws Exception {
         System.out.println("dealCommunityCards");
         Deck instance = new Deck();
         String[] result = instance.dealCommunityCards();
@@ -31,7 +31,7 @@ public class DeckTest {
      * Test of dealHoldCards method, of class Deck.
      */
     @Test
-    public void testDealHoldCards() {
+    public void testDealHoldCards() throws Exception {
         System.out.println("dealHoldCards");
         Deck instance = new Deck();
         String[] result = instance.dealHoldCards();
