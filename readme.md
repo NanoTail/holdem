@@ -20,6 +20,7 @@ I like to install dev dependencies locally and put a sym link in `node_modules/b
     
     ln -s node_modules/mocha/bin/_mocha node_modules/bin/_mocha
     ln -s node_modules/istanbul/lib/cli.js node_modules/bin/istanbul
+    ln -s node_modules/gulp/bin/gulp.js node_modules/bin/gulp
     
 ##Run `test`
     npm test
