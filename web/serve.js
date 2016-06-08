@@ -18,6 +18,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', function(req, res, next) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log(`Connection from: ${ip} at ${new Date().toISOString()}`)
   res.send(swig.renderFile(path.join(templateFolder, 'index.html'), {body: 'Hello world....'}))
 })
 
@@ -40,7 +42,6 @@ app.post('/rank', function(req, res, next) {
     var ranks = handRank.rank()
 
     res.send(ranks)
-  console.log(ranks)
 })
 
 app.listen(8000, function() {
