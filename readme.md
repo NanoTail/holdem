@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/nilobarp/holdem.svg?branch=js)](https://travis-ci.org/nilobarp/holdem)
+[![Build Status](https://travis-ci.org/nilobarp/holdem.svg?branch=master)](https://travis-ci.org/nilobarp/holdem)
 
 #Holdem
 Simplistic implementation of poker hand ranks.
