@@ -1,6 +1,30 @@
-#Poker hand analyzer
+[![Build Status](https://travis-ci.org/nilobarp/holdem.svg?branch=js)](https://travis-ci.org/nilobarp/holdem)
 
-There are two implementations, in Java and JavaScript.
+#Holdem
+Simplistic implementation of poker hand ranks.
 
- - JavaScript  : https://github.com/nilobarp/holdem/tree/js
- - Java        : https://github.com/nilobarp/holdem/tree/java
+#Dev environment setup
+##Clone the repository
+
+    cd ~
+    git clone https://github.com/nilobarp/holdem.git
+    
+##Install dependencies
+
+    cd ~/holdem
+    npm install
+    
+##Link `mocha` and `istanbul`
+
+Skip over this step if mocha and istanbul are installed globally.
+
+I like to install dev dependencies locally and put a sym link in `node_modules/bin` to help `npm` find the binaries.
+    
+    ln -s node_modules/mocha/bin/_mocha node_modules/bin/_mocha
+    ln -s node_modules/istanbul/lib/cli.js node_modules/bin/istanbul
+    ln -s node_modules/gulp/bin/gulp.js node_modules/bin/gulp
+    
+##Run `test`
+    npm test
+##Run code coverage
+    npm run cover
