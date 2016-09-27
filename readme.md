@@ -2,6 +2,7 @@
 
 #Holdem
 Simplistic implementation of poker hand ranks.
+Read background of the algorithm here https://github.com/nilobarp/holdem-java/blob/master/readme.md
 
 #Dev environment setup
 ##Clone the repository
@@ -14,17 +15,9 @@ Simplistic implementation of poker hand ranks.
     cd ~/holdem
     npm install
     
-##Link `mocha` and `istanbul`
-
-Skip over this step if mocha and istanbul are installed globally.
-
-I like to install dev dependencies locally and put a sym link in `node_modules/bin` to help `npm` find the binaries.
-    
-    ln -s node_modules/mocha/bin/_mocha node_modules/bin/_mocha
-    ln -s node_modules/istanbul/lib/cli.js node_modules/bin/istanbul
-    ln -s node_modules/gulp/bin/gulp.js node_modules/bin/gulp
-    
 ##Run `test`
     npm test
 ##Run code coverage
     npm run cover
+##Start server
+    run `node web/serve.js` from project root and open browser to `http://localhost:8000`
